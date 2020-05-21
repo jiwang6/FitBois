@@ -1,2 +1,0 @@
-# FitBois
-Dope Fitness App

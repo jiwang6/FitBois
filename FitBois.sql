@@ -1,0 +1,65 @@
+DROP DATABASE IF EXISTS FitBois;
+
+CREATE DATABASE FitBois;
+USE FitBois;
+
+CREATE TABLE Goals (
+	goal_ID INTEGER NOT NULL,
+  height FLOAT NOT NULL,
+  weight FLOAT NOT NULL,
+  BMI FLOAT NOT NULL,
+  bodyFatPct FLOAT NOT NULL,
+);
+
+CREATE TABLE Goals_Record (
+  targetDate VARCHAR(30) PRIMARY KEY,
+  goal_ID INTEGER NOT NULL,
+
+  FOREIGN KEY (goal_ID) REFERENCES Goals (goal_ID)
+  	ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE Exercise (
+  exerName VARCHAR(30) PRIMARY KEY,
+  numSets INTEGER NOT NULL,
+  numReps INTEGER NOT NULL,
+  weight FLOAT NOT NULL,
+);
+
+CREATE TABLE Exercises_in_Workout(
+  workout_ID INTEGER PRIMARY KEY, 
+  exerName VARCHAR(30),
+  difficulty INTEGER,
+
+  FOREIGN KEY (exerName) REFERENCES Exercise (exerName)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE Workout (
+  workDate VARCHAR(10) NOT NULL PRIMARY KEY,
+  workTime VARCHAR(10) NOT NULL PRIMARY KEY,
+  workout_ID INTEGER,
+  
+  FOREIGN KEY (workout_ID) REFERENCES Exercises_in_Workout (workout_ID)
+  	ON UPDATE CASCADE ON DELETE CASCADE  
+);
+
+CREATE TABLE Current_Satus (
+  username VARCHAR(20) PRIMARY KEY,
+  statDate VARCHAR(10) NOT NULL PRIMARY KEY,
+  height FLOAT NOT NULL,
+  weigh FLOAT NOT NULL,
+  bodyFatPct FLOAT NOT NULL,
+  BMI FLOAT NOT NULL,
+  
+  FOREIGN KEY (statDate) REFERNCES Workout (workDate)
+  	ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE Users (
+  username VARCHAR(20) PRIMARY KEY
+
+  FOREIGN KEY (username) REFERENCES Current_Status (username)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
