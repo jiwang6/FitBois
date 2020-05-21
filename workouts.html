@@ -20,10 +20,12 @@
 
 		<div class = "body">
 			<h1>Workouts</h1>
-			<form id = "form" action="demo.php" method="post"
-					onsubmit="return checkForm();">
+			<form id = "form" action="login.php" method="post"  >
 				<label for="Username">Username</label>
 				<input id="Username" name="Username" type="text" required maxlength="20" />
+				
+
+				<input type="submit" value="Login" />
 			</form>
 			<h2>Look Up a Workout</h2>
 			<form id = "form" action="demo.php" method="post"
@@ -31,7 +33,7 @@
 					
 				<label for="workoutName">Workout Name</label>
 				<input id="workoutName" name="workoutName" type="text" required maxlength="50" /><br />
-				<input type="submit" value="Submit" />
+				<input type="submit" type = button value="Submit" />
 				
 			</form>
 
