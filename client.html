@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script type="text/javascript">
+      function processRequest() {
+        var url = document.getElementById('url').value;
+        var method = document.getElementById('method').value;
+        var content = document.getElementById('content').value;
+
+        var request = new XMLHttpRequest();
+        request.onload = function() {
+          var response = document.getElementById('response');
+          response.value = request.response;
+
+          var status = document.getElementById('status');
+          status.value = request.status;
+        };
+        request.open(method, url, true);
+        request.send(content);
+      }
+    </script>
+
+    <title>REST API client</title>
+  </head>
+
+  <body>
+    <h1>REST API client</h1>
+
+    <table>
+      <tr>
+        <th>Request URL</th>
+        <td>
+          <input id="url" name="url" size="50" />
+        </td>
+      </tr>
+      <tr>
+        <th>Request Method</th>
+        <td>
+          <select id="method" name="method">
+            <option value="delete">DELETE</option>
+            <option selected="selected" value="get">GET</option>
+            <option value="post">POST</option>
+            <option value="put">PUT</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th>Request Content</th>
+        <td>
+          <textarea cols="80" id="content" name="content" rows="5"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <th>Response Status</th>
+        <td>
+          <input id="status" name="status" readonly="readonly" type="text"
+                 value="" />
+        </td>
+      </tr>
+      <tr>
+        <th>Response Content</th>
+        <td>
+          <textarea cols="80" id="response" name="response"
+                    readonly="readonly" rows="8"></textarea>
+        </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td>
+          <input onclick="processRequest()" type="button" value="Submit" />
+        </td>
+    </table>
+  </body>
+</html>

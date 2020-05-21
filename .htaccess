@@ -1,0 +1,4 @@
+RewriteEngine On
+
+RewriteRule ^api/books/?$ books.php
+RewriteRule ^api/books/(.+)$ books.php?isbn=$1
