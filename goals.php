@@ -1,31 +1,3 @@
-<?php
-$servername = "localhost";
-$username = "student";
-$password = "CompSci364";
-$dbname = "FitBois";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-} else {
-	echo "Connection established<br>";
-}
-
-$sql = "SELECT * FROM users NATURAL JOIN current_status;";
-
-if ($conn->query($sql) == TRUE) {
-  echo "THE THING WORKED";
-} else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-echo "
-
-$conn->close();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -48,10 +20,12 @@ $conn->close();
 
 		<div class = "body">
 			<h1>Goals</h1>
-			<form id = "form" action="demo.php" method="post"
-					onsubmit="return checkForm();">
+			<form id = "form" action="login.php" method="post"  >
 				<label for="Username">Username</label>
 				<input id="Username" name="Username" type="text" required maxlength="20" />
+				
+
+				<input type="submit" value="Login" />
 			</form>
 
 				
@@ -78,6 +52,7 @@ $conn->close();
 		
 		<div class = "body">
 		<h3>Goals You've Set!</h3>
+
 			<table style="width:100%">
 			  <tr>
 				<th>Date</th>
@@ -85,24 +60,41 @@ $conn->close();
 				<th>BMI</th>
 				<th>Body Fat %</th>
 			  </tr>
-			  <tr>
-				<td>01/01/2019</td>
-				<td>205</td>
-				<td>29</td>
-				<td>29.0</td>
-			  </tr>
-			  <tr>
-				<td>04/01/2019</td>
-				<td>190</td>
-				<td>27</td>
-				<td>25</td>
-			  </tr>
-			  <tr>
-				<td>07/01/2019</td>
-				<td>175</td>
-				<td>25</td>
-				<td>22</td>
-			  </tr>
+				<?php // start php
+					$servername = "localhost";
+					$username = "student";
+					$password = "CompSci364";
+					$dbname = "FitBois";
+
+					// Create connection
+					$conn = new mysqli($servername, $username, $password, $dbname);
+					// Check connection
+					if ($conn->connect_error) {
+						die("Connection failed: " . $conn->connect_error);
+					}
+
+					$sql = "SELECT * FROM users NATURAL JOIN current_status 
+						WHERE username = '". $_COOKIE["username"] ."';";
+
+					// create stuff to do stuff
+					$qRes = $conn->query($sql);
+					echo $data['username'] . "<br>";
+
+					if ($conn->query($sql) == TRUE) {
+					} else {
+						echo "Error: " . $sql . "<br>" . $conn->error;
+					}
+					
+					while ($data = $qRes->fetch_assoc()) {
+						echo "<tr>
+							<td>". $data['statDate'] ."</td>
+							<td>". $data['weight'] ."</td>
+							<td>". $data['height'] ."</td>
+							<td>". $data['bodyFatPct'] ."</td>
+							</tr>";
+					}
+				?>
+
 			</table>
 		</div>
 		
@@ -130,7 +122,15 @@ $conn->close();
 			</form>
 			
 			<h3>Your Progress So Far:</h3>
-				<?php
+				
+			<table style="width:100%">
+			  <tr>
+				<th>Date</th>
+				<th>Weight (lbs)</th>
+				<th>BMI</th>
+				<th>Body Fat %</th>
+			  </tr>
+				<?php // start php
 					$servername = "localhost";
 					$username = "student";
 					$password = "CompSci364";
@@ -143,19 +143,35 @@ $conn->close();
 						die("Connection failed: " . $conn->connect_error);
 					}
 
-					$sql = "INSERT INTO MyGuests (firstname, lastname, email)
-					VALUES ('John', 'Doe', 'john@example.com')";
+					$sql = "SELECT * FROM users NATURAL JOIN current_status 
+						WHERE username = '". $_COOKIE["username"] ."';";
 
-					if ($conn->query($sql) === TRUE) {
-						echo "New record created successfully";
+					// create stuff to do stuff
+					$qRes = $conn->query($sql);
+					echo $data['username'] . "<br>";
+
+					if ($conn->query($sql) == TRUE) {
 					} else {
 						echo "Error: " . $sql . "<br>" . $conn->error;
 					}
-
-					$conn->close();
+					
+					while ($data = $qRes->fetch_assoc()) {
+						echo "<tr>
+							<td>". $data['statDate'] ."</td>
+							<td>". $data['weight'] ."</td>
+							<td>". $data['height'] ."</td>
+							<td>". $data['bodyFatPct'] ."</td>
+							</tr>";
+					}
 				?>
+
+			</table>
+				
 		</div>
 		
 		<script src="script.js"></script>
 	</body>
 </html>
+<?php
+$conn->close();
+?>

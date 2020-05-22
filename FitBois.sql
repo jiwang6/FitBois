@@ -11,7 +11,7 @@ CREATE TABLE goals (
 );
 
 CREATE TABLE goals_record (
-  username VARCHAR(20) PRIMARY KEY,
+  username VARCHAR(20),
   targetDate VARCHAR(30),
   goal_ID INTEGER NOT NULL,
 
@@ -46,7 +46,7 @@ CREATE TABLE workout (
 );
 
 CREATE TABLE current_status (
-  username VARCHAR(20) PRIMARY KEY,
+  username VARCHAR(20),
   statDate VARCHAR(10) NOT NULL,
   height FLOAT NOT NULL,
   weight FLOAT NOT NULL,
@@ -106,7 +106,8 @@ INSERT INTO current_status (username, statDate, height, weight, bodyFatPct) VALU
 ('FitBoi2', '01/23/2004', 78, 181, 20),
 ('FitBoi3', '12/24/2005', 80, 184, 25),
 ('FitBoi4', '10/08/2012', 72, 160, 30),
-('FitBoi5', '06/13/2000', 68, 159, 35);
+('FitBoi5', '06/13/2000', 68, 159, 35),
+('FitBoi1', '06/13/2000', 68, 159, 35);
 
 INSERT INTO users (username) VALUES
 ('FitBoi1'),
