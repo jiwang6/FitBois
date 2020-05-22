@@ -73,8 +73,12 @@
 						die("Connection failed: " . $conn->connect_error);
 					}
 
-					$sql = "SELECT * FROM users NATURAL JOIN current_status 
-						WHERE username = '". $_COOKIE["username"] ."';";
+					$sql = "SELECT * FROM users
+										NATURAL JOIN  current_status
+											NATURAL JOIN goals_record
+											JOIN goals ON goals_record.goal_ID = goals. goal_ID
+
+										WHERE username = '". $_COOKIE["username"] ."';";
 
 					// create stuff to do stuff
 					$qRes = $conn->query($sql);
@@ -87,10 +91,10 @@
 					
 					while ($data = $qRes->fetch_assoc()) {
 						echo "<tr>
-							<td>". $data['statDate'] ."</td>
-							<td>". $data['weight'] ."</td>
-							<td>". $data['height'] ."</td>
-							<td>". $data['bodyFatPct'] ."</td>
+							<td>". $data['targetDate'] ."</td>
+							<td>". $data['goals.weight'] ."</td>
+							<td>". $data['goals.height'] ."</td>
+							<td>". $data['goals.bodyFatPct'] ."</td>
 							</tr>";
 					}
 				?>

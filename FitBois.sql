@@ -6,7 +6,7 @@ USE FitBois;
 
 CREATE TABLE goals (
 	goal_ID INTEGER NOT NULL PRIMARY KEY,
-  weight FLOAT NOT NULL,
+	weight FLOAT NOT NULL,
   bodyFatPct FLOAT NOT NULL
 );
 
@@ -53,10 +53,10 @@ CREATE TABLE current_status (
   bodyFatPct FLOAT NOT NULL,
   
   FOREIGN KEY (username) REFERENCES workout (username)
-  	ON UPDATE CASCADE ON DELETE CASCADE,
-  
-  FOREIGN KEY (username) REFERENCES goals_record (username)
   	ON UPDATE CASCADE ON DELETE CASCADE
+  
+--  FOREIGN KEY (username) REFERENCES goals_record (username)
+--  	ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE users (
