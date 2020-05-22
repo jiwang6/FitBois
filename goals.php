@@ -102,8 +102,7 @@
 
 				
 			<h2>Update Your Status</h2>
-			<form id = "form" action="demo.php" method="post"
-					onsubmit="return checkForm();">
+			<form id = "form" action="addstatus.php" method="post" >
 					
 				<label for="date">Date</label>
 				<input id="date" name="date" type="date" required maxlength="50" /><br />
@@ -111,8 +110,8 @@
 				<label for="weight">Weight (lbs)</label>
 				<input id="weight" name="weight" type="number" required min="1"/><br />
 				
-				<label for="bmi">Height</label>
-				<input id="bmi" name="height" type="number" required min="1" max="300"/><br />
+				<label for="height">Height</label>
+				<input id="height" name="height" type="number" required min="1" max="300"/><br />
 				
 				<label for="bfp">Body Fat Percentage</label>
 				<input id="bfp" name="bfp" type="number" required min="1" max="50"/><br/>

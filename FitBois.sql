@@ -89,7 +89,7 @@ INSERT INTO exercise (exerName, numSets, numReps, weight) VALUES
 ('leg press', 5, 12, 225),
 ('walk', 5, 3, 0);
 
-INSERT INTO exercises_in_workout (workout_ID, exerName, difficulty) VALUES
+INSERT INTO exercises_in_workout (workout_ID, exerName) VALUES
 (1, 'jump'),
 (2, 'bench'),
 (3, 'squat'),
