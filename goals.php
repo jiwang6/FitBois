@@ -34,8 +34,7 @@
 			<h1>Goals</h1>
 			
 			<h2>Update / Enter a New Goal</h2>
-			<form id = "form" action="addgoals.php" method="post"
-					onsubmit="return checkForm();">
+			<form id = "form" action="addgoals.php" method="post" >
 					
 				<label for="goalDate">Goal Date</label>
 				<input id="goalDate" name="goalDate" type="date" required maxlength="50" /><br />

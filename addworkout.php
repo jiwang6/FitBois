@@ -33,8 +33,24 @@
 		die("Connection failed: " . $conn->connect_error);
 	}
 	
-	$sql = "INSERT INTO workout (username, workDate, workout_ID, workout_Name) VALUES 
-			('".$_COOKIE["username"]."', '". $_POST['date'] ."',".$_POST['height'] .",". $_POST['weight'] .",".$_POST['bfp'].");";
+	$sql = "INSERT INTO workout (username, workout_Name) VALUES 
+			('".$_COOKIE["username"]."', '".$_POST['workoutName']."');";
+
+	if ($conn->query($sql) == TRUE) {
+	} else {
+		echo "Error: " . $sql . "<br>" . $conn->error;
+	}
+	
+	$sql = "INSERT INTO exercises_in_workout (exerName) VALUES 
+			('".$_POST['exerciseName']."');";
+
+	if ($conn->query($sql) == TRUE) {
+	} else {
+		echo "Error: " . $sql . "<br>" . $conn->error;
+	}
+	
+	$sql = "INSERT INTO exercise (exerName, numSets, numReps, weight) VALUES 
+			('".$_POST['exerciseName']."',". $_POST['sets'] . "," . $_POST['reps'] . "," . $_POST['weight'] .");";
 
 	if ($conn->query($sql) == TRUE) {
 	} else {
