@@ -1,24 +1,12 @@
 <?php
 
-function addBook($book) {
+function getBook($username) {
   global $db;
 
-  $query = "INSERT INTO book (isbn, title, copyright, publisher) ".
-           "VALUES (?, ?, ?, ?);";
+  $query = "SELECT * FROM current_status WHERE username = ?;";
 
   $statement = $db->prepare($query);
-  $statement->bind_param('ssss', $book['isbn'], $book['title'],
-                         $book['copyright'], $book['publisher']);
-  $statement->execute();
-}
-
-function getBook($isbn) {
-  global $db;
-
-  $query = "SELECT * FROM book WHERE isbn = ?;";
-
-  $statement = $db->prepare($query);
-  $statement->bind_param('s', $isbn);
+  $statement->bind_param('s', $username);
   $statement->execute();
 
   $data = array();
@@ -29,10 +17,10 @@ function getBook($isbn) {
   return $row;
 }
 
-function getBooks() {
+function getUsers() {
   global $db;
 
-  $query = "SELECT * FROM book ORDER BY title ASC, copyright ASC;";
+  $query = "SELECT * FROM users ORDER BY username ASC;";
 
   $statement = $db->prepare($query);
   if (! empty($params)) {
@@ -44,37 +32,26 @@ function getBooks() {
 
   $results = $statement->get_result();
   while ($row = $results->fetch_assoc()) {
-    $data[$row['isbn']] = $_SERVER['REQUEST_URI'].'/'.$row['isbn'];
+    $data[$row['username']] = $_SERVER['REQUEST_URI'].'/'.$row['username'];
   }
 
   return $data;
 }
 
-function removeBook($isbn) {
-  global $db;
-
-  $query = "DELETE FROM book WHERE isbn = ?;";
-
-  $statement = $db->prepare($query);
-  $statement->bind_param('s', $isbn);
-  $statement->execute();
-}
-
-
 //open database connection
-$db = new mysqli("localhost", "student", "CompSci364", "library");
+$db = new mysqli("localhost", "student", "CompSci364", "FitBois"); // FitBois is database name
 
 header('Content-Type: application/json');
 switch ($_SERVER['REQUEST_METHOD']) {
   case 'GET':
-    if (isset($_REQUEST['isbn']) && 0 < strlen($_REQUEST['isbn'])) {
-      $data = getBook($_REQUEST['isbn']);
+    if (isset($_REQUEST['username']) && 0 < strlen($_REQUEST['username'])) {
+      $data = getBook($_REQUEST['username']);
       if (! isset($data)) {
         http_response_code(404);
         die();
       }
     } else {
-      $data = getBooks();
+      $data = getUsers();
     }
 
     echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
@@ -84,12 +61,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
     $book = json_decode(file_get_contents('php://input'), true);
 
     // insert the book
-    addBook($book);
+    addBook($username);
 
     http_response_code(201);
 
     // retrieve the book's record
-    $book = getBook($book['isbn']);
+    $book = getBook($book['username']);
     echo json_encode($book, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     break;
 
@@ -102,8 +79,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
     break;
 
   case 'DELETE':
-    if (isset($_REQUEST['isbn']) && 0 < strlen($_REQUEST['isbn'])) {
-      $data = removeBook($_REQUEST['isbn']);
+    if (isset($_REQUEST['username']) && 0 < strlen($_REQUEST['username'])) {
+      $data = removeBook($_REQUEST['username']);
     }
 
     http_response_code(204);

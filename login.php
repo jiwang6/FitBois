@@ -17,7 +17,7 @@
 	 		<?php
 			$value = $_POST['Username'];
 
-			setcookie("TestCookie", $value);
+			setcookie("username", $value);
 		?>
 
 <!-- Note the use of <?php ?> to embed PHP commands

@@ -1,4 +1,4 @@
 RewriteEngine On
 
-RewriteRule ^api/books/?$ books.php
-RewriteRule ^api/books/(.+)$ books.php?isbn=$1
+RewriteRule ^api/bois/?$ bois.php
+RewriteRule ^api/bois/(.+)$ bois.php?username=$1

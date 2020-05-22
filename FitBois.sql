@@ -35,7 +35,8 @@ CREATE TABLE exercises_in_workout (
 );
 
 CREATE TABLE workout (
-  workDate VARCHAR(10) NOT NULL PRIMARY KEY,
+	username VARCHAR(20) NOT NULL PRIMARY KEY,
+  workDate VARCHAR(10) NOT NULL,
   workout_ID INTEGER,
   workout_Name VARCHAR(30),
   
@@ -50,7 +51,7 @@ CREATE TABLE current_status (
   weight FLOAT NOT NULL,
   bodyFatPct FLOAT NOT NULL,
   
-  FOREIGN KEY (statDate) REFERENCES workout (workDate)
+  FOREIGN KEY (username) REFERENCES workout (username)
   	ON UPDATE CASCADE ON DELETE CASCADE,
   
   FOREIGN KEY (statDate) REFERENCES goals_record (targetDate)
@@ -92,12 +93,12 @@ INSERT INTO exercises_in_workout (workout_ID, exerName, difficulty) VALUES
 (4, 'leg press', 1),
 (5, 'walk', 2);
 
-INSERT INTO workout (workDate, workout_ID, workout_Name) VALUES
-('12/03/2001', 1, 'Basic HIIT'),
-('01/23/2004', 2, 'I am dying'),
-('12/24/2005', 3, 'dear lord help'),
-('10/08/2012', 4, 'easy legs'),
-('06/13/2000', 5, 'literally a walk');
+INSERT INTO workout (username, workDate, workout_ID, workout_Name) VALUES
+('FitBoi1', '12/03/2001', 1, 'Basic HIIT'),
+('FitBoi2', '01/23/2004', 2, 'I am dying'),
+('FitBoi3', '12/24/2005', 3, 'dear lord help'),
+('FitBoi4', '10/08/2012', 4, 'easy legs'),
+('FitBoi5', '06/13/2000', 5, 'literally a walk');
 
 INSERT INTO current_status (username, statDate, height, weight, bodyFatPct) VALUES
 ('FitBoi1', '12/03/2001', 70, 180, 15),
