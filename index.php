@@ -19,6 +19,14 @@
 		</div>
 
 		<div class = "body">
+		<h1>LOGIN</h1>
+		<form id = "form" action="login.php" method="post"  >
+				<label for="Username">Username</label>
+				<input id="Username" name="Username" type="text" required maxlength="20" />
+				
+
+				<input type="submit" value="Login" />
+			</form>
 			<h1>What is FitBois?</h1>
 			<p>FitBois is a streamlined fitness tracking service that combines the cutting edge of minimalist design and military-approved functionaliy. </br> We offer an ad-free, distraction-free service. Unlike bloated services such as "MyFitnessPal," our application is built from the ground up with features both athletes and enthusiasts terazzo-wide actually want.</p>
 			

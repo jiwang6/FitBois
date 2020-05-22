@@ -32,15 +32,7 @@
 
 		<div class = "body">
 			<h1>Goals</h1>
-			<form id = "form" action="login.php" method="post"  >
-				<label for="Username">Username</label>
-				<input id="Username" name="Username" type="text" required maxlength="20" />
-				
-
-				<input type="submit" value="Login" />
-			</form>
-
-				
+			
 			<h2>Update / Enter a New Goal</h2>
 			<form id = "form" action="addgoals.php" method="post"
 					onsubmit="return checkForm();">

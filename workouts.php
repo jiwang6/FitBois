@@ -32,15 +32,7 @@
 		</div>
 
 		<div class = "body">
-			<h1>Workouts</h1>
-			<form id = "form" action="login.php" method="post"  >
-				<label for="Username">Username</label>
-				<input id="Username" name="Username" type="text" required maxlength="20" />
-				
-
-				<input type="submit" value="Login" />
-
-				
+			<h1>Workouts</h1>				
 			<h2>Update / Enter a New Workout</h2>
 			<form id = "form" action="addworkout.php" method="post" >
 				
@@ -65,45 +57,47 @@
 		
 		
 		<div>
-		<h3>Monday Legs</h3>
-			<table style="width:100%">
-			  <tr>
-				<th>Exersise</th>
-				<th>Weight (lbs)</th>
-				<th>Sets</th>
-				<th>Reps</th>
-			  </tr>
-			  <tr>
-				<td>Back Squat</td>
-				<td>280</td>
-				<td>5</td>
-				<td>10</td>
-			  </tr>
-			  <tr>
-				<td>Leg Press</td>
-				<td>500</td>
-				<td>5</td>
-				<td>12</td>
-			  </tr>
-			  <tr>
-				<td>Seated Extension</td>
-				<td>150</td>
-				<td>4</td>
-				<td>10</td>
-			  </tr>
-			  	<tr>
-				<td>Standing Curl</td>
-				<td>100</td>
-				<td>5</td>
-				<td>10</td>
-			  </tr>
-			  <tr>
-				<td>Calf Press</td>
-				<td>420</td>
-				<td>5</td>
-				<td>12</td>
-			  </tr>
-			</table>
+			<?php // start php
+							$sql = "SELECT workout_Name, exerName, weight, numSets, numReps FROM workout NATURAL JOIN exercises_in_workout NATURAL JOIN exercise WHERE workout.username = '". $_COOKIE["username"] ."' ORDER BY workout_ID ASC;";
+
+						// create stuff to do stuff
+						$qRes = $conn->query($sql);
+						echo $data['username'] . "<br>";
+
+						if ($conn->query($sql) == TRUE) {
+						} else {
+							echo "Error: " . $sql . "<br>" . $conn->error;
+						}
+						$data = $qRes->fetch_assoc();
+						
+						echo "<h2>". $data['workout_Name'] ."</h2>";
+						echo "<table style='width:100%'>";
+						echo "<tr>
+									<th>Exersise</th>
+									<th>Weight (lbs)</th>
+									<th>Sets</th>
+									<th>Reps</th>
+									</tr>
+									<tr>";
+						
+						echo "<tr>
+						<td>". $data['exerName'] ."</td>
+						<td>". $data['weight'] ."</td>
+						<td>". $data['numSets'] ."</td>
+						<td>". $data['numReps'] ."</td>
+						</tr>";
+						
+						while ($data = $qRes->fetch_assoc()) {
+							echo "<tr>
+								<td>". $data['exerName'] ."</td>
+								<td>". $data['weight'] ."</td>
+								<td>". $data['numSets'] ."</td>
+								<td>". $data['numReps'] ."</td>
+								</tr>";
+						}
+						
+						echo "</table>";
+				?>
 		</div>
 		
 		<script src="script.js"></script>

@@ -27,7 +27,7 @@ CREATE TABLE exercise (
 );
 
 CREATE TABLE exercises_in_workout (
-  workout_ID INTEGER AUTO_INCREMENT PRIMARY KEY, 
+  workout_ID INTEGER, 
   exerName VARCHAR(30),
 
   FOREIGN KEY (exerName) REFERENCES exercise (exerName)
@@ -38,10 +38,7 @@ CREATE TABLE workout (
 	username VARCHAR(20) NOT NULL ,
   workDate VARCHAR(10) NOT NULL,
   workout_ID INTEGER AUTO_INCREMENT PRIMARY KEY,
-  workout_Name VARCHAR(30),
-  
-  FOREIGN KEY (workout_ID) REFERENCES exercises_in_workout (workout_ID)
-  	ON UPDATE CASCADE ON DELETE CASCADE  
+  workout_Name VARCHAR(30)
 );
 
 CREATE TABLE current_status (
@@ -94,6 +91,8 @@ INSERT INTO exercises_in_workout (workout_ID, exerName) VALUES
 (2, 'bench'),
 (3, 'squat'),
 (4, 'leg press'),
+(1, 'walk'),
+(1, 'squat'),
 (5, 'walk');
 
 INSERT INTO workout (username, workDate, workout_ID, workout_Name) VALUES
