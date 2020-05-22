@@ -41,8 +41,8 @@
 		echo "Error: " . $sql . "<br>" . $conn->error;
 	}
 	
-	$sql = "INSERT INTO exercises_in_workout (exerName) VALUES 
-			('".$_POST['exerciseName']."');";
+	$sql = "INSERT INTO exercises_in_workout (workout_Name, exerName) VALUES 
+			('".$_POST['workoutName']."', '".$_POST['exerciseName']."');";
 
 	if ($conn->query($sql) == TRUE) {
 	} else {
