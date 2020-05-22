@@ -70,9 +70,7 @@
         
         <div>
             <?php // start php
-                            $sql = "SELECT DISTINCT * FROM workout w INNER JOIN  exercises_in_workout ew
-    ON w.workout_Name = ew.workout_Name
-inner join  exercise e where username = '". $_COOKIE["username"] ."' AND ew.exerName = e.exerName;"; 
+                            $sql = "SELECT DISTINCT * FROM workout w NATURAL JOIN exercises_in_workout ew NATURAL JOIN  exercise e where username = '".$_COOKIE["username"]."';"; 
 
  
 
@@ -86,27 +84,20 @@ inner join  exercise e where username = '". $_COOKIE["username"] ."' AND ew.exer
                         } else {
                             echo "Error: " . $sql . "<br>" . $conn->error;
                         }
-                        $data = $qRes->fetch_assoc();
                         
-                        echo "<h2>". $data['workout_Name'] ."</h2>";
                         echo "<table style='width:100%'>";
                         echo "<tr>
-                                    <th>Exersise</th>
+                        						<th>Workout Name</th>
+                                    <th>Exercise</th>
                                     <th>Weight (lbs)</th>
                                     <th>Sets</th>
                                     <th>Reps</th>
                                     </tr>
                                     <tr>";
                         
-                        echo "<tr>
-                        <td>". $data['exerName'] ."</td>
-                        <td>". $data['weight'] ."</td>
-                        <td>". $data['numSets'] ."</td>
-                        <td>". $data['numReps'] ."</td>
-                        </tr>";
-                        
                         while ($data = $qRes->fetch_assoc()) {
                             echo "<tr>
+                                <td>". $data['workout_Name'] ."</td>
                                 <td>". $data['exerName'] ."</td>
                                 <td>". $data['weight'] ."</td>
                                 <td>". $data['numSets'] ."</td>
