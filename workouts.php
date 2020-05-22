@@ -42,17 +42,13 @@
 
 				
 			<h2>Update / Enter a New Workout</h2>
-			<form id = "form" action="demo.php" method="post"
-					onsubmit="return checkForm();">
+			<form id = "form" action="addworkout.php" method="post" >
 				
 				<label for="workoutName">Workout Name</label>
 				<input id="workoutName" name="workoutName" type="text" required maxlength="50" /><br />
 
 				<label for="exerciseName">Exercise Name</label>
 				<input id="exerciseName" name="exerciseName" type="text" required maxlength="50" /><br />
-				
-				<label for="delEx">Delete Exercise from Workout</label>
-				<input id="delEx" name="delEx" type="checkbox" value = "delete" /><br/> <br/>
 				
 				<label for="weight">Weight (lbs)</label>
 				<input id="weight" name="weight" type="number" required min="1"/><br />
