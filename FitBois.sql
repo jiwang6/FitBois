@@ -73,7 +73,7 @@ INSERT INTO goals (goal_ID, weight, bodyFatPct) VALUES
 (4, 155, 25),
 (5, 154, 30);
 
-INSERT INTO goals_record (username, targetDate, Goal_ID) VALUES
+INSERT INTO goals_record (username, targetDate, goal_ID) VALUES
 ('FitBoi1', '12/03/2001', 1),
 ('FitBoi2', '01/23/2004', 2),
 ('FitBoi3', '12/24/2005', 3),

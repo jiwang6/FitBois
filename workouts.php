@@ -13,9 +13,9 @@
 		</div>
 
 		<div class = "navbar">
-			<a href="./index.html">FB Intro</a>
-			<a href="./goals.html">Goals</a>
-			<a class="active" href="./workouts.html">Workouts</a>
+			<a href="./index.php">FB Intro</a>
+			<a href="./goals.php">Goals</a>
+			<a class="active" href="./workouts.php">Workouts</a>
 		</div>
 
 		<div class = "body">

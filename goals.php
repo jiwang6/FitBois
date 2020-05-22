@@ -1,3 +1,31 @@
+<?php
+$servername = "localhost";
+$username = "student";
+$password = "CompSci364";
+$dbname = "FitBois";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+} else {
+	echo "Connection established<br>";
+}
+
+$sql = "SELECT * FROM users NATURAL JOIN current_status;";
+
+if ($conn->query($sql) == TRUE) {
+  echo "THE THING WORKED";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+echo "
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -13,7 +41,7 @@
 		</div>
 
 		<div class = "navbar">
-			<a href="./index.html">FB Intro</a>
+			<a href="./index.php">FB Intro</a>
 			<a class="active"  href="./goals.php">Goals</a>
 			<a href="./workouts.php">Workouts</a>
 		</div>
@@ -80,11 +108,6 @@
 		
 		<div class = "body">
 			<h1>Where I'm At Now</h1>
-			<form id = "form" action="demo.php" method="post"
-					onsubmit="return checkForm();">
-				<label for="Username">Username</label>
-				<input id="Username" name="Username" type="text" required maxlength="20" />
-			</form>
 
 				
 			<h2>Update Your Status</h2>
@@ -107,32 +130,30 @@
 			</form>
 			
 			<h3>Your Progress So Far:</h3>
-			<table style="width:100%">
-			  <tr>
-				<th>Date</th>
-				<th>Weight (lbs)</th>
-				<th>BMI</th>
-				<th>Body Fat %</th>
-			  </tr>
-			  <tr>
-				<td>06/01/2018</td>
-				<td>220</td>
-				<td>31</td>
-				<td>30</td>
-			  </tr>
-			  <tr>
-				<td>08/01/2018</td>
-				<td>210</td>
-				<td>29</td>
-				<td>29</td>
-			  </tr>
-			  <tr>
-				<td>10/01/2018</td>
-				<td>210</td>
-				<td>29</td>
-				<td>27</td>
-			  </tr>
-			</table>
+				<?php
+					$servername = "localhost";
+					$username = "student";
+					$password = "CompSci364";
+					$dbname = "FitBois";
+
+					// Create connection
+					$conn = new mysqli($servername, $username, $password, $dbname);
+					// Check connection
+					if ($conn->connect_error) {
+						die("Connection failed: " . $conn->connect_error);
+					}
+
+					$sql = "INSERT INTO MyGuests (firstname, lastname, email)
+					VALUES ('John', 'Doe', 'john@example.com')";
+
+					if ($conn->query($sql) === TRUE) {
+						echo "New record created successfully";
+					} else {
+						echo "Error: " . $sql . "<br>" . $conn->error;
+					}
+
+					$conn->close();
+				?>
 		</div>
 		
 		<script src="script.js"></script>
