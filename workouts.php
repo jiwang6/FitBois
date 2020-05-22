@@ -1,3 +1,16 @@
+<?php // start php
+	$servername = "localhost";
+	$username = "student";
+	$password = "CompSci364";
+	$dbname = "FitBois";
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	// Check connection
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -26,16 +39,6 @@
 				
 
 				<input type="submit" value="Login" />
-			</form>
-			<h2>Look Up a Workout</h2>
-			<form id = "form" action="demo.php" method="post"
-					onsubmit="return checkForm();">
-					
-				<label for="workoutName">Workout Name</label>
-				<input id="workoutName" name="workoutName" type="text" required maxlength="50" /><br />
-				<input type="submit" type = button value="Submit" />
-				
-			</form>
 
 				
 			<h2>Update / Enter a New Workout</h2>
@@ -50,10 +53,6 @@
 				
 				<label for="delEx">Delete Exercise from Workout</label>
 				<input id="delEx" name="delEx" type="checkbox" value = "delete" /><br/> <br/>
-				
-				<input id = "hard" type="radio" name="difficulty" value="hard">Hard
-				<input id = "intermediate" type="radio" name="difficulty" value="intermediate">Intermediate
-				<input id = "Easy" type="radio" name="difficulty" value="easy">Easy<br />
 				
 				<label for="weight">Weight (lbs)</label>
 				<input id="weight" name="weight" type="number" required min="1"/><br />
@@ -114,4 +113,8 @@
 		<script src="script.js"></script>
 	</body>
 </html>
+
+<?php
+$conn->close();
+?>
 

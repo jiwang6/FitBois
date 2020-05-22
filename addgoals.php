@@ -15,7 +15,7 @@
 <!-- Give a link back to the main page -->
 
      <a href="<?php echo $_SERVER["HTTP_REFERER"]; ?>">Click Here</a> to return to the FitBois site.
-
+     <br/>
    </center>
  </body>
 </html>
@@ -34,13 +34,20 @@
 	}
 	
 	$sql = "INSERT INTO goals (weight, bodyFatPct) VALUES 
-			($_POST['weight'], $_POST['bfp']);
-							
-			INSERT INTO goals_record (username, targetDate) VALUES
-				(".$_COOKIE["username"].", $_POST['goaldate']);";
+			(".$_POST['weight'].", ".$_POST['bfp'].");";
 
 	if ($conn->query($sql) == TRUE) {
 	} else {
 		echo "Error: " . $sql . "<br>" . $conn->error;
 	}
+	
+$sql = "INSERT INTO goals_record (username, targetDate) VALUES
+				('".$_COOKIE["username"]."', '". $_POST['goalDate'] ."');";
+
+if ($conn->query($sql) == TRUE) {
+	} else {
+		echo "Error: " . $sql . "<br>" . $conn->error;
+	}
+
+$conn->close();
 ?>				
