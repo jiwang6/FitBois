@@ -29,16 +29,15 @@ CREATE TABLE exercise (
 CREATE TABLE exercises_in_workout (
   workout_ID INTEGER AUTO_INCREMENT PRIMARY KEY, 
   exerName VARCHAR(30),
-  difficulty INTEGER,
 
   FOREIGN KEY (exerName) REFERENCES exercise (exerName)
     ON UPDATE CASCADE ON DELETE CASCADE
-);
+);	
 
 CREATE TABLE workout (
-	username VARCHAR(20) NOT NULL PRIMARY KEY,
+	username VARCHAR(20) NOT NULL ,
   workDate VARCHAR(10) NOT NULL,
-  workout_ID INTEGER AUTO_INCREMENT,
+  workout_ID INTEGER AUTO_INCREMENT PRIMARY KEY,
   workout_Name VARCHAR(30),
   
   FOREIGN KEY (workout_ID) REFERENCES exercises_in_workout (workout_ID)
@@ -50,20 +49,17 @@ CREATE TABLE current_status (
   statDate VARCHAR(10) NOT NULL,
   height FLOAT NOT NULL,
   weight FLOAT NOT NULL,
-  bodyFatPct FLOAT NOT NULL,
+  bodyFatPct FLOAT NOT NULL
   
-  FOREIGN KEY (username) REFERENCES goals_record (username)
-  	ON UPDATE CASCADE ON DELETE CASCADE
+--  FOREIGN KEY (username) REFERENCES goals_record (username)
+--  	ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE users (
-  username VARCHAR(20) PRIMARY KEY,
+  username VARCHAR(20) PRIMARY KEY
 
-  FOREIGN KEY (username) REFERENCES current_status (username)
-    ON UPDATE CASCADE ON DELETE CASCADE,
-    
-  FOREIGN KEY (username) REFERENCES workout (username)
-    ON UPDATE CASCADE ON DELETE CASCADE
+--  FOREIGN KEY (username) REFERENCES current_status (username)
+--    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 INSERT INTO goals (weight, bodyFatPct) VALUES
@@ -94,11 +90,11 @@ INSERT INTO exercise (exerName, numSets, numReps, weight) VALUES
 ('walk', 5, 3, 0);
 
 INSERT INTO exercises_in_workout (workout_ID, exerName, difficulty) VALUES
-(1, 'jump', 3),
-(2, 'bench', 5),
-(3, 'squat', 4),
-(4, 'leg press', 1),
-(5, 'walk', 2);
+(1, 'jump'),
+(2, 'bench'),
+(3, 'squat'),
+(4, 'leg press'),
+(5, 'walk');
 
 INSERT INTO workout (username, workDate, workout_ID, workout_Name) VALUES
 ('FitBoi1', '2001-12-03', 1, 'Basic HIIT'),
