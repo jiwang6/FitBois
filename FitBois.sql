@@ -5,7 +5,7 @@ USE FitBois;
 
 
 CREATE TABLE goals (
-	goal_ID INTEGER NOT NULL PRIMARY KEY,
+	goal_ID INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	weight FLOAT NOT NULL,
   bodyFatPct FLOAT NOT NULL
 );
@@ -13,7 +13,7 @@ CREATE TABLE goals (
 CREATE TABLE goals_record (
   username VARCHAR(20),
   targetDate VARCHAR(30),
-  goal_ID INTEGER NOT NULL,
+  goal_ID INTEGER AUTO_INCREMENT NOT NULL,
 
   FOREIGN KEY (goal_ID) REFERENCES goals (goal_ID)
   	ON UPDATE CASCADE ON DELETE CASCADE
@@ -27,7 +27,7 @@ CREATE TABLE exercise (
 );
 
 CREATE TABLE exercises_in_workout (
-  workout_ID INTEGER PRIMARY KEY, 
+  workout_ID INTEGER AUTO_INCREMENT PRIMARY KEY, 
   exerName VARCHAR(30),
   difficulty INTEGER,
 
@@ -38,7 +38,7 @@ CREATE TABLE exercises_in_workout (
 CREATE TABLE workout (
 	username VARCHAR(20) NOT NULL PRIMARY KEY,
   workDate VARCHAR(10) NOT NULL,
-  workout_ID INTEGER,
+  workout_ID INTEGER AUTO_INCREMENT,
   workout_Name VARCHAR(30),
   
   FOREIGN KEY (workout_ID) REFERENCES exercises_in_workout (workout_ID)
@@ -71,14 +71,18 @@ INSERT INTO goals (goal_ID, weight, bodyFatPct) VALUES
 (2, 183, 15),
 (3, 184, 20),
 (4, 155, 25),
-(5, 154, 30);
+(5, 154, 30),
+(6, 154, 30);
 
 INSERT INTO goals_record (username, targetDate, goal_ID) VALUES
-('FitBoi1', '12/03/2001', 1),
-('FitBoi2', '01/23/2004', 2),
-('FitBoi3', '12/24/2005', 3),
-('FitBoi4', '10/08/2012', 4),
-('FitBoi5', '06/13/2000', 5);
+('FitBoi1', '12/23/2001', 1),
+('FitBoi2', '02/23/2004', 2),
+('FitBoi2', '02/23/2004', 6),
+('FitBoi2', '02/23/2004', 1),
+('FitBoi3', '12/28/2005', 3),
+('FitBoi4', '11/08/2012', 4),
+('FitBoi5', '07/13/2000', 5),
+('FitBoi1', '07/13/2000', 6);
 
 INSERT INTO exercise (exerName, numSets, numReps, weight) VALUES
 ('jump', 5, 3, 0),
@@ -103,6 +107,8 @@ INSERT INTO workout (username, workDate, workout_ID, workout_Name) VALUES
 
 INSERT INTO current_status (username, statDate, height, weight, bodyFatPct) VALUES
 ('FitBoi1', '12/03/2001', 70, 180, 15),
+('FitBoi2', '01/23/2002', 70, 181, 20),
+('FitBoi2', '01/23/2003', 71, 181, 20),
 ('FitBoi2', '01/23/2004', 78, 181, 20),
 ('FitBoi3', '12/24/2005', 80, 184, 25),
 ('FitBoi4', '10/08/2012', 72, 160, 30),
@@ -115,6 +121,3 @@ INSERT INTO users (username) VALUES
 ('FitBoi3'),
 ('FitBoi4'),
 ('FitBoi5');
-
-
-

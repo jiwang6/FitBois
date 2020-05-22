@@ -1,3 +1,15 @@
+<?php // start php
+	$servername = "localhost";
+	$username = "student";
+	$password = "CompSci364";
+	$dbname = "FitBois";
+	// Create connection
+	$conn = new mysqli($servername, $username, $password, $dbname);
+	// Check connection
+	if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -30,7 +42,7 @@
 
 				
 			<h2>Update / Enter a New Goal</h2>
-			<form id = "form" action="demo.php" method="post"
+			<form id = "form" action="addgoals.php" method="post"
 					onsubmit="return checkForm();">
 					
 				<label for="goalDate">Goal Date</label>
@@ -38,9 +50,6 @@
 				
 				<label for="weight">Goal Weight (lbs)</label>
 				<input id="weight" name="weight" type="number" required min="1"/><br />
-				
-				<label for="bmi">Goal BMI</label>
-				<input id="bmi" name="bmi" type="number" required min="1" max="50"/><br />
 				
 				<label for="bfp">Goal Body Fat Percentage</label>
 				<input id="bfp" name="bfp" type="number" required min="1" max="50"/><br/>
@@ -57,28 +66,15 @@
 			  <tr>
 				<th>Date</th>
 				<th>Weight (lbs)</th>
-				<th>BMI</th>
 				<th>Body Fat %</th>
 			  </tr>
-				<?php // start php
-					$servername = "localhost";
-					$username = "student";
-					$password = "CompSci364";
-					$dbname = "FitBois";
-
-					// Create connection
-					$conn = new mysqli($servername, $username, $password, $dbname);
-					// Check connection
-					if ($conn->connect_error) {
-						die("Connection failed: " . $conn->connect_error);
-					}
-
-					$sql = "SELECT * FROM users
+				<?php 
+					$sql = "SELECT DISTINCT targetDate, goals.weight, goals.bodyFatPct FROM users
 										NATURAL JOIN  current_status
 											NATURAL JOIN goals_record
-											JOIN goals ON goals_record.goal_ID = goals. goal_ID
+											JOIN goals ON goals_record.goal_ID = goals.goal_ID
 
-										WHERE username = '". $_COOKIE["username"] ."';";
+										WHERE username = '". $_COOKIE["username"] ."'ORDER BY targetDate DESC;";
 
 					// create stuff to do stuff
 					$qRes = $conn->query($sql);
@@ -92,9 +88,8 @@
 					while ($data = $qRes->fetch_assoc()) {
 						echo "<tr>
 							<td>". $data['targetDate'] ."</td>
-							<td>". $data['goals.weight'] ."</td>
-							<td>". $data['goals.height'] ."</td>
-							<td>". $data['goals.bodyFatPct'] ."</td>
+							<td>". $data['weight'] ."</td>
+							<td>". $data['bodyFatPct'] ."</td>
 							</tr>";
 					}
 				?>
@@ -116,8 +111,8 @@
 				<label for="weight">Weight (lbs)</label>
 				<input id="weight" name="weight" type="number" required min="1"/><br />
 				
-				<label for="bmi">BMI</label>
-				<input id="bmi" name="bmi" type="number" required min="1" max="50"/><br />
+				<label for="bmi">Height</label>
+				<input id="bmi" name="height" type="number" required min="1" max="300"/><br />
 				
 				<label for="bfp">Body Fat Percentage</label>
 				<input id="bfp" name="bfp" type="number" required min="1" max="50"/><br/>
@@ -131,24 +126,12 @@
 			  <tr>
 				<th>Date</th>
 				<th>Weight (lbs)</th>
-				<th>BMI</th>
+				<th>Height</th>
 				<th>Body Fat %</th>
 			  </tr>
 				<?php // start php
-					$servername = "localhost";
-					$username = "student";
-					$password = "CompSci364";
-					$dbname = "FitBois";
-
-					// Create connection
-					$conn = new mysqli($servername, $username, $password, $dbname);
-					// Check connection
-					if ($conn->connect_error) {
-						die("Connection failed: " . $conn->connect_error);
-					}
-
-					$sql = "SELECT * FROM users NATURAL JOIN current_status 
-						WHERE username = '". $_COOKIE["username"] ."';";
+						$sql = "SELECT * FROM users NATURAL JOIN current_status 
+						WHERE username = '". $_COOKIE["username"] ."' ORDER BY statDate DESC;";
 
 					// create stuff to do stuff
 					$qRes = $conn->query($sql);
