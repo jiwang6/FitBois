@@ -11,7 +11,8 @@ CREATE TABLE goals (
 );
 
 CREATE TABLE goals_record (
-  targetDate VARCHAR(30) PRIMARY KEY,
+  username VARCHAR(20) PRIMARY KEY,
+  targetDate VARCHAR(30),
   goal_ID INTEGER NOT NULL,
 
   FOREIGN KEY (goal_ID) REFERENCES goals (goal_ID)
@@ -54,7 +55,7 @@ CREATE TABLE current_status (
   FOREIGN KEY (username) REFERENCES workout (username)
   	ON UPDATE CASCADE ON DELETE CASCADE,
   
-  FOREIGN KEY (statDate) REFERENCES goals_record (targetDate)
+  FOREIGN KEY (username) REFERENCES goals_record (username)
   	ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -72,12 +73,12 @@ INSERT INTO goals (goal_ID, weight, bodyFatPct) VALUES
 (4, 155, 25),
 (5, 154, 30);
 
-INSERT INTO goals_record (targetDate, Goal_ID) VALUES
-('12/03/2001', 1),
-('01/23/2004', 2),
-('12/24/2005', 3),
-('10/08/2012', 4),
-('06/13/2000', 5);
+INSERT INTO goals_record (username, targetDate, Goal_ID) VALUES
+('FitBoi1', '12/03/2001', 1),
+('FitBoi2', '01/23/2004', 2),
+('FitBoi3', '12/24/2005', 3),
+('FitBoi4', '10/08/2012', 4),
+('FitBoi5', '06/13/2000', 5);
 
 INSERT INTO exercise (exerName, numSets, numReps, weight) VALUES
 ('jump', 5, 3, 0),
